@@ -1,6 +1,6 @@
 # Workshop3-REST-API
 
-Implementation Jersey JAX WS for Workshop3 project.<br>
+Implementation of Jersey JAX WS for Workshop3 project: http://mlipski.site:8080/Workshop3WS/webapi/<br>
 API consumes and returns JSON media type.
 
 Specification:<BR>
