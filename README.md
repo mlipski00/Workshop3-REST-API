@@ -1,6 +1,6 @@
 # Workshop3-REST-API
 
-Implementation of Jersey JAX WS for Workshop3 project: http://mlipski.site:8080/Workshop3WS/webapi/<br>
+Implementation of Jersey JAX WS for Workshop3 project: http://mlipski.site:8080/Workshop3WS/<br>
 API consumes and returns JSON media type.
 
 Specification:<BR>
@@ -12,31 +12,31 @@ Specification:<BR>
 <th>Description</th>
 </tr>
 <tr>
-<td>/user</td>
+<td>webapi/user</td>
 <td>GET</td>
 <td></td>
 <td>returns list of all users</td>
 </tr>
 <tr>
-<td>/user?userId={userId}</td>
+<td>webapi/user?userId={userId}</td>
 <td>GET</td>
 <td>int</td>
 <td>returns user</td>
 </tr>
 <tr>
-<td>/user</td>
+<td>webapi/user</td>
 <td>POST</td>
 <td></td>
 <td>adds user</td>
 </tr>
 <tr>
-<td>/user/{userId}</td>
+<td>webapi/user/{userId}</td>
 <td>PUT</td>
 <td>int</td>
 <td>updates user</td>
 </tr>
 <tr>
-<td>/user/{userId}</td>
+<td>webapi/user/{userId}</td>
 <td>DELETE</td>
 <td>int</td>
 <td>deletes user</td>
