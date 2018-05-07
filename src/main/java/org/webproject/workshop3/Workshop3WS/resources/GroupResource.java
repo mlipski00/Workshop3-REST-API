@@ -30,7 +30,7 @@ public class GroupResource {
 	public List<Group> getGroup(@QueryParam("groupId") int groupId) throws SQLException {
 		if (groupId > 0 ) {
 			List<Group> loadedGroup = new ArrayList<>();
-			
+			loadedGroup.add(groupService.getGroupByID(groupId));
 			return loadedGroup;
 		}
 		return groupService.getAllGroups();

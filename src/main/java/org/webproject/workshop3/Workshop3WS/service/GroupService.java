@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.webproject.workshop3.Workshop3WS.model.Excercise;
+import org.webproject.workshop3.Workshop3WS.model.ExcerciseDao;
 import org.webproject.workshop3.Workshop3WS.model.Group;
 import org.webproject.workshop3.Workshop3WS.model.GroupDao;
 import org.webproject.workshop3.Workshop3WS.model.User;
@@ -31,6 +33,9 @@ public class GroupService {
 		}
 		GroupDao.saveToDB(group);
 		return group;
+	}
+	public Group getGroupByID(int groupId) throws SQLException {
+		return GroupDao.loadGroupById(groupId);
 	}
 
 	public Group updateGroup(int groupId, Group group) throws SQLException {

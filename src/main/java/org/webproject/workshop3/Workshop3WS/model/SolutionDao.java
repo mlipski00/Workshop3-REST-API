@@ -15,7 +15,7 @@ import org.webproject.workshop3.Workshop3WS.utils.DbUtil;
 
 public class SolutionDao {
 
-	public void saveToDB(Solution solution) throws SQLException {
+	public static void saveToDB(Solution solution) throws SQLException {
 		Connection conn = DbUtil.getConn();
 		PreparedStatement prepStat;
 		ResultSet rs = null;
@@ -164,7 +164,7 @@ public class SolutionDao {
 	}
 	
 	
-	public void delete(Solution solution) throws SQLException {
+	public static void delete(Solution solution) throws SQLException {
 		Connection conn = DbUtil.getConn();
 		if (solution.getId() != 0) {
 			String sql = "DELETE FROM solution WHERE id = ?;";
