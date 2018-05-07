@@ -127,9 +127,9 @@ Specification:<BR>
 			<td>updates solution</td>
 		</tr>
 		<tr>
-			<td>webapi/group/{groupId}</td>
+			<td>webapi/solution/{solutionId}</td>
 			<td>DELETE</td>
 			<td>int</td>
-			<td>deletes group</td>
+			<td>deletes solution</td>
 		</tr>
 </table>
