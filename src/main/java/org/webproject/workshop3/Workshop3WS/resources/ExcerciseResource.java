@@ -1,7 +1,6 @@
 package org.webproject.workshop3.Workshop3WS.resources;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -12,8 +11,9 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriInfo;
 
 import org.webproject.workshop3.Workshop3WS.model.Excercise;
 import org.webproject.workshop3.Workshop3WS.service.ExcerciseService;
@@ -27,13 +27,24 @@ public class ExcerciseResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Excercise> getExcercise(@QueryParam("excerciseId") int excerciseId) throws SQLException {
+	public List<Excercise> getExcercises(@Context UriInfo uriInfo) throws SQLException {
+			List<Excercise> loadedExcercises = excerciseService.getAllExcercises();
+			for (Excercise excercise : loadedExcercises) {
+				excercise.addLink(getUriForSelf(uriInfo, excercise), "self");
+			}
+		return loadedExcercises;
+	}
+	
+	@GET
+	@Path("/{excerciseId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Excercise getExcercise(@PathParam("excerciseId") int excerciseId, @Context UriInfo uriInfo) throws SQLException {
 		if (excerciseId > 0 ) {
-			List<Excercise> loadedExcercise = new ArrayList<>();
-			loadedExcercise.add(excerciseService.getExcerciseByID(excerciseId));
-			return loadedExcercise;
+			Excercise excercise = excerciseService.getExcerciseByID(excerciseId);
+			excercise.addLink(getUriForSelf(uriInfo, excercise), "self");
+			return excercise;
 		}
-		return excerciseService.getAllExcercises();
+		return null;
 	}
 	
 	@POST
@@ -59,5 +70,12 @@ public class ExcerciseResource {
 		excerciseService.removeExcercise(excerciseId);
 	}
 	
-
+	private String getUriForSelf(UriInfo uriInfo, Excercise excercise) {
+		String uri = uriInfo.getBaseUriBuilder()
+		.path(ExcerciseResource.class)
+		.path(Long.toString(excercise.getId()))
+		.build()
+		.toString();
+		return uri;
+	}
 }

@@ -13,7 +13,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriInfo;
 
 import org.webproject.workshop3.Workshop3WS.model.Solution;
 import org.webproject.workshop3.Workshop3WS.model.SolutionDao;
@@ -29,13 +31,24 @@ public class SolutionResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Solution> getSolution(@QueryParam("solutionId") int solutionId) throws SQLException {
-		if (solutionId > 0 ) {
-			List<Solution> loadedSolution = new ArrayList<>();
-			loadedSolution.add(solutionService.getSolutionByID(solutionId));
-			return loadedSolution;
+	public List<Solution> getSolutions( @Context UriInfo uriInfo) throws SQLException {
+		List<Solution> loadedSolutions = solutionService.getAllSolutions();
+		for (Solution solution : loadedSolutions) {
+			solution.addLink(getUriForSelf(uriInfo, solution), "self");
 		}
-		return solutionService.getAllUsers();
+		return loadedSolutions; 
+	}
+	
+	@GET
+	@Path("/{solutionId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Solution getSolution(@PathParam("solutionId") int solutionId, @Context UriInfo uriInfo) throws SQLException {
+		if (solutionId > 0 ) {
+			Solution solution = solutionService.getSolutionByID(solutionId);
+			solution.addLink(getUriForSelf(uriInfo, solution), "self");
+			return solution;			
+		}
+		return null;
 	}
 	
 	@POST
@@ -61,5 +74,13 @@ public class SolutionResource {
 		solutionService.removeSolution(solutionId);
 	}
 	
+	private String getUriForSelf(UriInfo uriInfo, Solution solution) {
+		String uri = uriInfo.getBaseUriBuilder()
+		.path(SolutionResource.class)
+		.path(Long.toString(solution.getId()))
+		.build()
+		.toString();
+		return uri;
+	}
 	
 }

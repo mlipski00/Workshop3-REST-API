@@ -1,6 +1,8 @@
 package org.webproject.workshop3.Workshop3WS.model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Solution {
@@ -8,9 +10,17 @@ public class Solution {
 	private int id;
 	private Timestamp created;
 	private Timestamp updated;
+	public List<Link> getLinks() {
+		return links;
+	}
+
+	public void setLinks(List<Link> links) {
+		this.links = links;
+	}
 	private String description;
 	private int excercise_id;
 	private int user_id;
+	private List<Link> links = new ArrayList<>();
 
 	public Solution(String description, int excercise_id, int user_id) {
 		java.util.Date javaDate = new java.util.Date();
@@ -77,5 +87,11 @@ public class Solution {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	public void addLink(String url, String rel) {
+		Link link = new Link();
+		link.setLink(url);
+		link.setRel(rel);
+		links.add(link);
 	}
 }

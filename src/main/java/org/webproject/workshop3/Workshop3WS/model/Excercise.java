@@ -1,5 +1,8 @@
 package org.webproject.workshop3.Workshop3WS.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Excercise {
 
 	public void setId(int id) {
@@ -11,6 +14,15 @@ public class Excercise {
 		this.id = id;
 		this.title = title;
 		this.description = description;
+		
+	}
+
+	public List<Link> getLinks() {
+		return links;
+	}
+
+	public void setLinks(List<Link> links) {
+		this.links = links;
 	}
 
 	@Override
@@ -21,6 +33,7 @@ public class Excercise {
 	private int id;
 	private String title;
 	private String description;
+	private List<Link> links = new ArrayList<>();
 
 	public Excercise(String title, String description) {
 		this.title = title;
@@ -49,5 +62,11 @@ public class Excercise {
 	public int getId() {
 		return id;
 	}
-
+	
+	public void addLink(String url, String rel) {
+		Link link = new Link();
+		link.setLink(url);
+		link.setRel(rel);
+		links.add(link);
+	}
 }

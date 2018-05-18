@@ -23,7 +23,7 @@ public class SolutionService {
 		}
 	}
 
-	public List<Solution> getAllUsers() {
+	public List<Solution> getAllSolutions() {
 		return new ArrayList<Solution>(solutions.values());
 	}
 

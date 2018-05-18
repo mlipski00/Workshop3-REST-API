@@ -13,7 +13,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.UriInfo;
 
 import org.webproject.workshop3.Workshop3WS.model.User;
 import org.webproject.workshop3.Workshop3WS.model.UserDao;
@@ -27,16 +29,35 @@ public class UserResource {
 	UserService userService = new UserService();
 	
 	@GET
+	@Path("/{userId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<User> getUser(@QueryParam("userId") int userId) throws SQLException {
+	public User getUser(@PathParam("userId") int userId,  @Context UriInfo uriInfo) throws SQLException {
 		if (userId > 0 ) {
-			List<User> loadedUser = new ArrayList<>();
-			loadedUser.add(userService.getUserByID(userId));
-			return loadedUser;
+			User user = userService.getUserByID(userId);
+			user.addLink(getUriForSelf(uriInfo, user), "self");
+			return user;
 		}
-		return userService.getAllUsers();
+		return null;
 	}
 	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<User> getUsers(@Context UriInfo uriInfo) throws SQLException {
+		List<User> loadedUsers = userService.getAllUsers();
+		for (User user : loadedUsers) {
+			user.addLink(getUriForSelf(uriInfo, user), "self");
+		}
+		return loadedUsers;
+	}
+	private String getUriForSelf(UriInfo uriInfo, User user) {
+		String uri = uriInfo.getBaseUriBuilder()
+		.path(UserResource.class)
+		.path(Long.toString(user.getId()))
+		.build()
+		.toString();
+		return uri;
+	}
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)

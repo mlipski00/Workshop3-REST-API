@@ -1,5 +1,8 @@
 package org.webproject.workshop3.Workshop3WS.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.webproject.workshop3.Workshop3WS.utils.BCrypt;
 
 public class User {
@@ -9,9 +12,18 @@ public class User {
 	private String email;
 	private String password;
 	private int person_group_id;
+	private List<Link> links = new ArrayList<>();
 
 	public int getId() {
 		return id;
+	}
+
+	public List<Link> getLinks() {
+		return links;
+	}
+
+	public void setLinks(List<Link> links) {
+		this.links = links;
 	}
 
 	public String getUsername() {
@@ -75,6 +87,13 @@ public class User {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public void addLink(String url, String rel) {
+		Link link = new Link();
+		link.setLink(url);
+		link.setRel(rel);
+		links.add(link);
 	}
 
 	@Override

@@ -19,7 +19,7 @@ Specification:<BR>
 			<td>returns list of all users</td>
 		</tr>
 		<tr>
-			<td>webapi/user?userId={userId}</td>
+			<td>webapi/user/{userId}</td>
 			<td>GET</td>
 			<td>int</td>
 			<td>returns user</td>
@@ -49,7 +49,7 @@ Specification:<BR>
 			<td>returns list of all excercises</td>
 		</tr>
 		<tr>
-			<td>webapi/excercise?excerciseId={excerciseId}</td>
+			<td>webapi/excercise/{excerciseId}</td>
 			<td>GET</td>
 			<td>int</td>
 			<td>returns excercise</td>
@@ -79,7 +79,7 @@ Specification:<BR>
 			<td>returns list of all groups</td>
 		</tr>
 		<tr>
-			<td>webapi/group?groupId={groupId}</td>
+			<td>webapi/group/{groupId}</td>
 			<td>GET</td>
 			<td>int</td>
 			<td>returns group</td>
@@ -109,7 +109,7 @@ Specification:<BR>
 			<td>returns list of all solutions</td>
 		</tr>
 		<tr>
-			<td>webapi/solution?solutionId={solutionId}</td>
+			<td>webapi/solution/{solutionId}</td>
 			<td>GET</td>
 			<td>int</td>
 			<td>returns solution</td>
