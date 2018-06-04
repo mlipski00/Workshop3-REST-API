@@ -1,6 +1,5 @@
 package org.webproject.workshop3.Workshop3WS.service;
 
-import java.awt.Transparency;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

@@ -126,6 +126,12 @@
 			<td>returns solution</td>
 		</tr>
 		<tr>
+			<td>webapi/solution/user/{userId}</td>
+			<td>GET</td>
+			<td>int</td>
+			<td>returns list of all solutions by User ID</td>
+		</tr>
+		<tr>
 			<td>webapi/solution</td>
 			<td>POST</td>
 			<td></td>

@@ -114,6 +114,12 @@ Specification:<BR>
 			<td>int</td>
 			<td>returns solution</td>
 		</tr>
+				<tr>
+			<td>webapi/solution/user/{userId}</td>
+			<td>GET</td>
+			<td>int</td>
+			<td>returns list of all solutions by userID</td>
+		</tr>
 		<tr>
 			<td>webapi/solution</td>
 			<td>POST</td>

@@ -2,6 +2,7 @@ package org.webproject.workshop3.Workshop3WS.resources;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -47,6 +48,20 @@ public class SolutionResource {
 			Solution solution = solutionService.getSolutionByID(solutionId);
 			solution.addLink(getUriForSelf(uriInfo, solution), "self");
 			return solution;			
+		}
+		return null;
+	}
+	
+	@GET
+	@Path("/user/{userId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Solution> getSolutionsByUserID(@PathParam("userId") int userId, @Context UriInfo uriInfo) throws SQLException {
+		if (userId > 0 ) {
+			List<Solution> loadedSolutions = solutionService.getSolutionsByUserID(userId);
+			for (Solution solution : loadedSolutions) {
+				solution.addLink(getUriForSelf(uriInfo, solution), "self");
+			}
+			return loadedSolutions;			
 		}
 		return null;
 	}

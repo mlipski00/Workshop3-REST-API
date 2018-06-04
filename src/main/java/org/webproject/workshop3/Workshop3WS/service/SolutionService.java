@@ -37,6 +37,10 @@ public class SolutionService {
 	public Solution getSolutionByID(int SolutionId) throws SQLException {
 		return SolutionDao.loadSolutionById(SolutionId);
 	}
+	
+	public List<Solution> getSolutionsByUserID(int userID) throws SQLException {
+		return SolutionDao.loadAllSolutionsByUserID(userID);
+	}
 
 	public Solution updateSolution(int solutionId, Solution solution) throws SQLException {
 		if (solutionId == 0) {
