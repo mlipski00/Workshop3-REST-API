@@ -43,6 +43,14 @@ public class User {
 		this.person_group_id = person_group_id;
 	}
 
+	public void setPassword(String password) {
+		this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+
+	}
+
+	public void setPaswordWithoutHashing(String password) {
+		this.password = password;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -71,11 +79,6 @@ public class User {
 		this.username = username;
 		this.email = email;
 		this.setPassword(password);
-	}
-
-	public void setPassword(String password) {
-		this.password = BCrypt.hashpw(password, BCrypt.gensalt());
-
 	}
 
 	public User() {
